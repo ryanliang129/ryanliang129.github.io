@@ -75,7 +75,7 @@
     
       <div class="icon"></div>
       <a href="/2016/01/09/Prove-The-Correctness-of-Greedy-Algorithm/">
-  <time datetime="2016-01-08T16:08:32.000Z">
+  <time datetime="2016-01-08T16:11:49.000Z">
     2016-01-09
   </time>
 </a>
@@ -89,7 +89,8 @@
   
   <div class="entry">
     
-      <p>Greedy algorithms can be some of the simplest algorithms to implement, but they’re often among the hardest algorithms to design and analyze. You can often stumble on the right algorithm but not recognize that you’ve found it, or might find an algorithm you’re sure is correct and hit a brick wall trying to formally prove its correctness.  </p>
+      <p>#Overview</p>
+<p>Greedy algorithms can be some of the simplest algorithms to implement, but they’re often among the hardest algorithms to design and analyze. You can often stumble on the right algorithm but not recognize that you’ve found it, or might find an algorithm you’re sure is correct and hit a brick wall trying to formally prove its correctness.  </p>
 <p>This handout discusses how to structure the two major proof techniques we’ve covered for greedy algorithms (“greedy stays ahead” and exchange arguments) and gives some intuition for when one might be appropriate over the other. We recommend referring to the lecture slides for examples of formal, worked examples of these proofs in practice.  </p>
 <h2 id="Format_for_Correctness_Proofs"><a href="#Format_for_Correctness_Proofs" class="headerlink" title="Format for Correctness Proofs"></a>Format for Correctness Proofs</h2><p>Greedy algorithms are often used to solve optimization problems: you want to maximize or minimize some quantity subject to a set of constraints. For example:  </p>
 <p>• Maximize the number of events you can attend, but do not attend any overlapping events.<br>• Minimize the number of jumps required to cross the pond, but do not fall into the water.<br>• Minimize the cost of all edges chosen, but do not disconnect the graph.  </p>
@@ -143,7 +144,7 @@
     
       <div class="icon"></div>
       <a href="/2016/01/09/Dynamic-Programming/">
-  <time datetime="2016-01-08T16:08:23.000Z">
+  <time datetime="2016-01-08T16:11:01.000Z">
     2016-01-09
   </time>
 </a>
@@ -175,7 +176,7 @@
 <p><strong>Case 2:</strong> what if <em>S</em>[i] = <em>T</em>[j]? Then the LCS of <em>S</em>[1..i] and <em>T</em>[1..j] might as well match them up. For instance, if I gave you a common subsequence that matched <em>S</em>[i] to an earlier location in <em>T</em>, for instance, you could always match it to <em>T</em>[j] instead. So, in this case we have:  </p>
 <center>LCS[i,j] = 1 + LCS[i−1,j−1].</center>   
 
-<p>So, we can just do two loops (over values of <em>i</em> and <em>j</em>) , filling in the LCS using these rules. Here’s what it looks like pictorially for the example above, with S along the leftmost column and T along the top row.</p>
+<p>So, we can just do two loops (over values of <em>i</em> and <em>j</em>) , filling in the LCS using these rules. Here’s what it looks like pictorially for the example above, with S along the leftmost column and T along the top row.  </p>
 <center><br><table><br><tbody><br><tr><td><em></em></td><td><em>B</em></td><td><em>A</em></td><td><em>C</em></td><td><em>B</em></td><td><em>A</em></td><td><em>D</em></td></tr><br><tr><td>A</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr><br><tr><td>B</td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td></tr><br><tr><td>A</td><td>1</td><td>2</td><td>2</td><td>2</td><td>3</td><td>3</td></tr><br><tr><td>Z</td><td>1</td><td>2</td><td>2</td><td>2</td><td>3</td><td>3</td></tr><br><tr><td>D</td><td>1</td><td>2</td><td>2</td><td>2</td><td>3</td><td>4</td></tr><br><tr><td>C</td><td>1</td><td>2</td><td>3</td><td>3</td><td>3</td><td>4</td></tr><br></tbody><br></table><br></center>   
 
 <p>We just fill out this matrix row by row, doing constant amount of work per entry, so this takes <em>O</em>(<em>mn</em>) time overall. The final answer (the length of the LCS of <em>S</em> and <em>T</em>) is in the lower-right corner.  </p>
@@ -207,12 +208,9 @@
 <p>In this memoized version, our running time is now just <em>O</em>(<em>mn</em>). One easy way to see this is as follows. First, notice that we reach line (**) at most <em>mn</em> times (at most once for any given value of the parameters). This means we make at most 2<em>mn</em> recursive calls total (at most two calls for each time we reach that line). Any given call of LCS involves only <em>O</em>(1) work (performing some equality checks and taking a max or adding 1), so overall the total running time is <em>O</em>(<em>mn</em>).  </p>
 <p>Comparing bottom-up and top-down dynamic programming, both do almost the same work. The top-down (memoized) version pays a penalty in recursion overhead, but can potentially be faster than the bottom-up version in situations where some of the subproblems never get examined at all. These differences, however, are minor: you should use whichever version is easiest and most intuitive for you for the given problem at hand.  </p>
 <p><strong>More about LCS: Discussion and Extensions.</strong> An equivalent problem to LCS is the “mini- mum edit distance” problem, where the legal operations are insert and delete. (E.g., the unix “diff” command, where <em>S</em> and <em>T</em> are files, and the elements of <em>S</em> and <em>T</em> are lines of text). The minimum edit distance to transform <em>S</em> into <em>T</em> is achieved by doing |<em>S</em>|−LCS(S,T) deletes and |<em>T</em>|−LCS(S,T) inserts.<br>In computational biology applications, often one has a more general notion of sequence alignment. Many of these different problems all allow for basically the same kind of Dynamic Programming solution.</p>
-<h2 id="Example__232_3A_The_Knapsack_Problem"><a href="#Example__232_3A_The_Knapsack_Problem" class="headerlink" title="Example #2: The Knapsack Problem"></a>Example #2: The Knapsack Problem</h2><p>Imagine you have a homework assignment with different parts labeled A through G. Each part has a “value” (in points) and a “size” (time in hours to complete). For example, say the values and times for our assignment are:  <center></center></p>
-<p><table></table></p>
-<p><tbody></tbody></p>
-<p><tr><td><em></em></td><td><em><center>A</center></em></td><td><em><center>B</center></em></td><td><em><center>C</center></em></td><td><em><center>D</center></em></td><td><em><center>E</center></em></td><td><em><center>F</center></em></td><td><em><center>G</center></em></td></tr></p>
-<p><tr><td><em><center>value</center></em></td><td><center>7</center></td><td><center>9</center></td><td><center>5</center></td><td><center>12</center></td><td><center>14</center></td><td><center>6</center></td><td><center>12</center></td></tr></p>
-<p><tr><td><em><center>time</center></em></td><td><center>3</center></td><td><center>4</center></td><td><center>2</center></td><td><center>6</center></td><td><center>7</center></td><td><center>3</center></td><td><center>5</center></td></tr><br><br><br>  </p>
+<h2 id="Example__232_3A_The_Knapsack_Problem"><a href="#Example__232_3A_The_Knapsack_Problem" class="headerlink" title="Example #2: The Knapsack Problem"></a>Example #2: The Knapsack Problem</h2><p>Imagine you have a homework assignment with different parts labeled A through G. Each part has a “value” (in points) and a “size” (time in hours to complete). For example, say the values and times for our assignment are:  </p>
+<center><br><table><br><tbody><br><tr><td><em></em></td><td><em><center>A</center></em></td><td><em><center>B</center></em></td><td><em><center>C</center></em></td><td><em><center>D</center></em></td><td><em><center>E</center></em></td><td><em><center>F</center></em></td><td><em><center>G</center></em></td></tr><br><tr><td><em><center>value</center></em></td><td><center>7</center></td><td><center>9</center></td><td><center>5</center></td><td><center>12</center></td><td><center>14</center></td><td><center>6</center></td><td><center>12</center></td></tr><br><tr><td><em><center>time</center></em></td><td><center>3</center></td><td><center>4</center></td><td><center>2</center></td><td><center>6</center></td><td><center>7</center></td><td><center>3</center></td><td><center>5</center></td></tr><br></tbody><br></table><br></center>  
+
 <p>Say you have a total of 15 hours: which parts should you do? If there was partial credit that was proportional to the amount of work done (e.g., one hour spent on problem C earns you 2.5 points) then the best approach is to work on problems in order of points/hour (a greedy strategy). But, what if there is no partial credit? In that case, which parts should you do, and what is the best total value possible?  </p>
 <p>The above is an instance of the <em>knapsack problem</em>, formally defined as follows:  </p>
 <p><strong>Definition 2</strong> <em>In the <strong>knapsack problem</strong> we are given a set of n items, where each item i is specified by a size si and a value vi. We are also given a size bound S (the size of our knapsack). The goal is to find the subset of items of maximum total value such that sum of their sizes is at most S (they all fit into the knapsack).</em>  </p>
