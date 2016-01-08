@@ -18,7 +18,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/01/09/Dynamic-Programming/index.html">
 <meta property="og:site_name" content="Sometimes ever, sometimes never.">
 <meta property="og:description" content="OverviewDynamic Programming is a powerful technique that allows one to solve many different types of problems in time O(n2) or O(n3) for which a naive approach would take exponential time. In this lec">
-<meta property="og:updated_time" content="2016-01-08T16:16:57.000Z">
+<meta property="og:updated_time" content="2016-01-08T16:18:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dynamic Programming">
 <meta name="twitter:description" content="OverviewDynamic Programming is a powerful technique that allows one to solve many different types of problems in time O(n2) or O(n3) for which a naive approach would take exponential time. In this lec">
@@ -72,7 +72,7 @@
     
       <div class="icon"></div>
       <a href="/2016/01/09/Dynamic-Programming/">
-  <time datetime="2016-01-08T16:16:57.000Z">
+  <time datetime="2016-01-08T16:18:20.000Z">
     2016-01-09
   </time>
 </a>
@@ -120,7 +120,8 @@
     if (S[n] == T[m]) 
         result = 1 + LCS(S,n-1,T,m-1); // no harm in matching up
     else 
-        result = max{LCS(S,n-1,T,m), LCS(S,n,T,m-1)};        return result;
+        result = max{LCS(S,n-1,T,m), LCS(S,n,T,m-1)};  
+    return result;
 }  
 </code></pre><p>This algorithm runs in exponential time. In fact, if <em>S</em> and <em>T</em> use completely disjoint sets of characters (so that we never have <em>S</em>[n] == <em>T</em>[m]) then the number of times that LCS(S,1,T,1) is recursively called equals [n+m−2,m-1]. In the memoized version, we store results in a matrix so that any given set of arguments to LCS only produces new work (new recursive calls) once. The memoized version begins by initializing arr[i][j] to unknown for all <em>i</em>, <em>j</em>, and then proceeds as follows:  </p>
 <pre><code>LCS(S,n,T,m)
@@ -131,7 +132,8 @@
         result = 1 + LCS(S,n-1,T,m-1);
     else 
         result = max{LCS(S,n-1,T,m), LCS(S,n,T,m-1)};
-    arr[n][m] = result; // &lt;- and this line (**)        return result;
+    arr[n][m] = result; // &lt;- and this line (**)  
+    return result;
 }  
 </code></pre><p>All we have done is saved our work in line (**) and made sure that we only embark on new recursive calls if we haven’t already computed the answer in line (*).  </p>
 <p>In this memoized version, our running time is now just <em>O</em>(<em>mn</em>). One easy way to see this is as follows. First, notice that we reach line (**) at most <em>mn</em> times (at most once for any given value of the parameters). This means we make at most 2<em>mn</em> recursive calls total (at most two calls for each time we reach that line). Any given call of LCS involves only <em>O</em>(1) work (performing some equality checks and taking a max or adding 1), so overall the total running time is <em>O</em>(<em>mn</em>).  </p>
