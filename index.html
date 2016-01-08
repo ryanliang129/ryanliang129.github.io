@@ -74,22 +74,22 @@
   <header>
     
       <div class="icon"></div>
-      <a href="/2016/01/08/Prove-The-Correctness-of-Greedy-Algorithm/">
-  <time datetime="2016-01-08T15:57:44.000Z">
-    2016-01-08
+      <a href="/2016/01/09/Prove-The-Correctness-of-Greedy-Algorithm/">
+  <time datetime="2016-01-08T16:03:12.000Z">
+    2016-01-09
   </time>
 </a>
     
     
   
-    <h1 class="title"><a href="/2016/01/08/Prove-The-Correctness-of-Greedy-Algorithm/"></a></h1>
+    <h1 class="title"><a href="/2016/01/09/Prove-The-Correctness-of-Greedy-Algorithm/">The Correctness of Greedy Algorithm</a></h1>
   
 
   </header>
   
   <div class="entry">
     
-      <h2 id="title_3AProve_The_Correctness_of_Greedy_Algorithm"><a href="#title_3AProve_The_Correctness_of_Greedy_Algorithm" class="headerlink" title="title:Prove The Correctness of Greedy Algorithm"></a>title:Prove The Correctness of Greedy Algorithm</h2><h4 id="date_3A_2016-01-07_20_3A56_3A01"><a href="#date_3A_2016-01-07_20_3A56_3A01" class="headerlink" title="date: 2016-01-07 20:56:01"></a>date: 2016-01-07 20:56:01</h4><p>Greedy algorithms can be some of the simplest algorithms to implement, but they’re often among the hardest algorithms to design and analyze. You can often stumble on the right algorithm but not recognize that you’ve found it, or might find an algorithm you’re sure is correct and hit a brick wall trying to formally prove its correctness.  </p>
+      <h4 id="date_3A_2016-01-07_20_3A56_3A01"><a href="#date_3A_2016-01-07_20_3A56_3A01" class="headerlink" title="date: 2016-01-07 20:56:01"></a>date: 2016-01-07 20:56:01</h4><p>Greedy algorithms can be some of the simplest algorithms to implement, but they’re often among the hardest algorithms to design and analyze. You can often stumble on the right algorithm but not recognize that you’ve found it, or might find an algorithm you’re sure is correct and hit a brick wall trying to formally prove its correctness.  </p>
 <p>This handout discusses how to structure the two major proof techniques we’ve covered for greedy algorithms (“greedy stays ahead” and exchange arguments) and gives some intuition for when one might be appropriate over the other. We recommend referring to the lecture slides for examples of formal, worked examples of these proofs in practice.  </p>
 <h2 id="Format_for_Correctness_Proofs"><a href="#Format_for_Correctness_Proofs" class="headerlink" title="Format for Correctness Proofs"></a>Format for Correctness Proofs</h2><p>Greedy algorithms are often used to solve optimization problems: you want to maximize or minimize some quantity subject to a set of constraints. For example:  </p>
 <p>• Maximize the number of events you can attend, but do not attend any overlapping events.<br>• Minimize the number of jumps required to cross the pond, but do not fall into the water.<br>• Minimize the cost of all edges chosen, but do not disconnect the graph.  </p>
@@ -142,15 +142,15 @@
   <header>
     
       <div class="icon"></div>
-      <a href="/2016/01/08/Dynamic-Programming/">
-  <time datetime="2016-01-08T15:55:38.000Z">
-    2016-01-08
+      <a href="/2016/01/09/Dynamic-Programming/">
+  <time datetime="2016-01-08T16:01:08.000Z">
+    2016-01-09
   </time>
 </a>
     
     
   
-    <h1 class="title"><a href="/2016/01/08/Dynamic-Programming/">Dynamic Programming</a></h1>
+    <h1 class="title"><a href="/2016/01/09/Dynamic-Programming/">Dynamic Programming</a></h1>
   
 
   </header>
@@ -251,6 +251,7 @@
 <p>For Dynamic Programming, the key question is now: in the above procedure, as you go through the recursion, what do the subproblems look like and how many are there? Answer: each subproblem looks like “what is the best way to multiply some sub-interval of the matrices <em>A<sub>i</sub> × . . . × A<sub>j</sub></em>?” So, there are only <em>O</em>(<em>n</em><sup>2</sup>) <em>different</em> subproblems.  </p>
 <p>The second question is now: how long does it take to solve a given subproblem assuming you’ve already solved all the smaller subproblems (i.e., how much time is spent inside any <em>given</em> recursive call)? Answer: to figure out how to best multiply <em>A<sub>i</sub> × . . . × A<sub>j</sub></em>, we just consider all possible middle points <em>k</em> and select the one that minimizes:</p>
 <center>optimal cost to multiply <em>A<sub>i</sub> . . . A<sub>k</sub></em>      ← already computed</center><br><center>+ optimal cost to multiply <em>A<sub>k+1</sub> . . . A<sub>j</sub></em>  ← already computed</center><br><center>+ cost to multiply the results.           ← get this from the dimensions</center>  
+
 
 <p>This just takes <em>O</em>(1) work for any given <em>k</em>, and there are at most <em>n</em> different values <em>k</em> to consider, so overall we just spend <em>O</em>(<em>n</em>) time per subproblem. So, if we use Dynamic Programming to save our results in a lookup table, then since there are only <em>O</em>(<em>n</em><sup>2</sup>) subproblems we will spend only <em>O</em>(<em>n</em><sup>3</sup>) time overall.<br>If you want to do this using bottom-up Dynamic Programming, you would first solve for all sub- problems with <em>j</em> − <em>i</em> = 1, then solve for all with <em>j</em> − <em>i</em> = 2, and so on, storing your results in an <em>n</em> by <em>n</em> matrix. The main difference between this problem and the two previous ones we have seen is that any given subproblem takes time <em>O</em>(<em>n</em>) to solve rather than <em>O</em>(1), which is why we get <em>O</em>(<em>n</em><sup>3</sup>) total running time. It turns out that by being very clever you can actually reduce this to _O-(1) amortized time per subproblem, producing an <em>O</em>(<em>n</em><sup>2</sup>)-time algorithm, but we won’t get into that here.</p>
 <h2 id="High-level_Discussion_of_Dynamic_Programming"><a href="#High-level_Discussion_of_Dynamic_Programming" class="headerlink" title="High-level Discussion of Dynamic Programming"></a>High-level Discussion of Dynamic Programming</h2><p>What kinds of problems can be solved using Dynamic Programming? One property these problems have is that if the optimal solution involves solving a subproblem, then it uses the optimal solution to that subproblem. For instance, say we want to find the shortest path from <em>A</em> to <em>B</em> in a graph, and say this shortest path goes through <em>C</em>. Then it must be using the shortest path from <em>C</em> to <em>B</em>. Or, in the knapsack example, if the optimal solution does not use item <em>n</em>, then it is the optimal solution for the problem in which item <em>n</em> does not exist. The other key property is that there should be only a polynomial number of different subproblems. These two properties together allow us to build the optimal solution to the final problem from optimal solutions to subproblems.  </p>
