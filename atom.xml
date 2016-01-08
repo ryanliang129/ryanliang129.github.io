@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2016-01-08T15:29:13.000Z</updated>
+  <updated>2016-01-08T15:31:43.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -18,17 +18,16 @@
     <title><![CDATA[Dynamic Programming]]></title>
     <link href="http://yoursite.com/2016/01/08/Dynamic-Programming/"/>
     <id>http://yoursite.com/2016/01/08/Dynamic-Programming/</id>
-    <published>2016-01-08T15:29:13.000Z</published>
-    <updated>2016-01-08T15:29:13.000Z</updated>
+    <published>2016-01-08T15:31:43.000Z</published>
+    <updated>2016-01-08T15:31:43.000Z</updated>
     <content type="html"><![CDATA[<h4 id="date_3A_2016-01-08_21_3A17_3A00"><a href="#date_3A_2016-01-08_21_3A17_3A00" class="headerlink" title="date: 2016-01-08 21:17:00"></a>date: 2016-01-08 21:17:00</h4><h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>Dynamic Programming is a powerful technique that allows one to solve many different types of problems in time <em>O</em>(<em>n</em><sup>2</sup>) or <em>O</em>(<em>n</em><sup>3</sup>) for which a naive approach would take exponential time. In this lecture, we discuss this technique, and present a few key examples. Topics in this lecture include:  </p>
 <p>  • The basic idea of Dynamic Programming.<br>  • Example: Longest Common Subsequence.<br>  • Example: Knapsack.<br>  • Example: Matrix-chain multiplication.  </p>
 <h2 id="The_Basic_Idea"><a href="#The_Basic_Idea" class="headerlink" title="The Basic Idea"></a>The Basic Idea</h2><p>Dynamic Programming is a powerful technique that can be used to solve many problems in time <em>O</em>(<em>n</em><sup>2</sup>) or <em>O</em>(<em>n</em><sup>3</sup>) for which a naive approach would take exponential time. (Usually to get running time below that—if it is possible—one would need to add other ideas as well.) Dynamic Programming is a general approach to solving problems, much like “divide-and-conquer” is a general method, except that unlike divide-and-conquer, the subproblems will typically overlap. This lecture we will present two ways of thinking about Dynamic Programming as well as a few examples.  </p>
 <p>There are several ways of thinking about the basic idea.  </p>
 <p><strong>Basic Idea (version 1):</strong> What we want to do is take our problem and somehow break it down into a reasonable number of subproblems (where “reasonable” might be something like <em>n</em><sup>2</sup>) in such a way that we can use optimal solutions to the smaller subproblems to give us optimal solutions to the larger ones. Unlike divide-and-conquer (as in mergesort or quicksort) it is OK if our subproblems overlap, so long as there are not too many of them.  </p>
 <h2 id="Example__231_3A_Longest_Common_Subsequence"><a href="#Example__231_3A_Longest_Common_Subsequence" class="headerlink" title="Example #1: Longest Common Subsequence"></a>Example #1: Longest Common Subsequence</h2><p><strong>Definition 1</strong> <em>The <strong>Longest Common Subsequence (LCS)</strong> problem is as follows. We are given two strings: string S of length n, and string T of length m. Our goal is to produce their longest common subsequence: the longest sequence of characters that appear left-to-right (but not necessarily in a contiguous block) in both strings.</em>  </p>
-<p>For example, consider:</p>
-<center><em>S</em> = ABAZDC</center><br><center><em>T</em> = BACBAD</center>
-
+<p>For example, consider:  </p>
+<center><em>S</em> = ABAZDC</center><br><center><em>T</em> = BACBAD</center>  
 
 <p>In this case, the LCS has length 4 and is the string <strong>ABAD</strong>. Another way to look at it is we are finding a 1-1 matching between some of the letters in <em>S</em> and some of the letters in <em>T</em> such that none of the edges in the matching cross each other.  </p>
 <p>For instance, this type of problem comes up all the time in genomics: given two DNA fragments, the LCS gives information about what they have in common and the best way to line them up.<br>Let’s now solve the LCS problem using Dynamic Programming. As subproblems we will look at the LCS of a prefix of <em>S</em> and a prefix of <em>T</em>, running over all pairs of prefixes. For simplicity, let’s worry first about finding the <em>length</em> of the LCS and then we can modify the algorithm to produce the actual sequence itself.  </p>
